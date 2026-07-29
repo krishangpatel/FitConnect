@@ -1,8 +1,6 @@
-import datetime
 from rest_framework import serializers
 from django.core.validators import EmailValidator
 from django.core.exceptions import ValidationError
-from rest_framework.validators import UniqueValidator
 
 
 from .models import *
@@ -166,12 +164,6 @@ class ExerciseListSerializer(serializers.ModelSerializer):
         model = ExerciseBank
         fields = ['exercise_id', 'name', 'description', 'muscle_group_name', 'equipment_name']
 
-class ExerciseSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = ExerciseBank
-        fields = ['name']
-
-
 class BecomeCoachRequestSerializer(serializers.ModelSerializer):
     class Meta:
         model = BecomeCoachRequest
@@ -220,25 +212,21 @@ class ExerciseInWorkoutPlanSerializer(serializers.ModelSerializer):
         fields = ['exercise_in_plan_id', 'plan_id', 'exercise', 'sets', 'reps', 'weight', 'duration_minutes', 'is_active']
 
     def validate_sets(self, value):
-        #print('sets = ', value)
         if value <= 0:
             raise ValidationError('Number of sets must be at least 1')
         return value
 
     def validate_reps(self, value):
-        #print('reps = ', value)
         if value <= 0:
             raise ValidationError('Number of reps must be at least 1')
         return value
 
     def validate_weight(self, value):
-        #print('weight = ', value)
         if value <= 0:
             raise ValidationError('Weight cannot be less than 1')
         return value
 
     def validate_duration_minutes(self, value):
-        #print('duration = ', value)
         if value <= 0:
             raise ValidationError('Duration cannot be less than 1')
         return value
