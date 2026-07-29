@@ -39,7 +39,6 @@ class CreateUserView(APIView):
             try:
                 validate_password(password)
             except ValidationError as err:
-                print('password was invalid')
                 return Response(err, status=status.HTTP_400_BAD_REQUEST)
 
             serializer.save()
@@ -51,13 +50,10 @@ class CreateUserView(APIView):
             if credentials_serializer.is_valid():
                 credentials_serializer.save()
             else:
-                print('Credential serialization went wrong somehow')
                 return Response(credentials_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
 
         else:
-            print('serializer was not valid')
-            print(serializer.errors)
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
@@ -118,7 +114,6 @@ class CoachList(APIView):
         experience = params.get('experience')
         if experience is not None:
             experience = int(experience)
-            print('experience=', experience)
             if experience < 0:
                 raise ValidationError('Experience cannot be negative')
 
@@ -195,7 +190,6 @@ class FireCoach(APIView):
             user_serializer.save()
             return Response('Successfully fired coach.', status=status.HTTP_200_OK)
         else:
-            print('Invalid:', user_serializer.errors)
             return Response(user_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
@@ -204,7 +198,6 @@ class CoachClients(APIView):
 
     def get(self, request, pk):
         clients = User.objects.filter(has_coach=self.hired, hired_coach__coach_id=pk)
-        print(clients)
         clients_serializer = UserSerializer(clients, many=True)
         return Response(clients_serializer.data, status=status.HTTP_200_OK)
 
@@ -460,7 +453,6 @@ class ExerciseInWorkoutPlanView(APIView):
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def post(self, request):
-        print('data: ', request.data)
         serializer = ExerciseInWorkoutPlanSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
