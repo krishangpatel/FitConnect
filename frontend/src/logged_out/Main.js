@@ -1,4 +1,4 @@
-import React, { memo, useState, useEffect, useCallback, useContext } from "react";
+import React, { memo, useState, useEffect, useCallback } from "react";
 import PropTypes from "prop-types";
 import AOS from "aos/dist/aos";
 import withStyles from '@mui/styles/withStyles';
@@ -12,7 +12,6 @@ import DialogSelector from "./register_login/DialogSelector";
 import Routing from "./Routing";
 import smoothScrollTop from "../shared/functions/smoothScrollTop";
 import Cookies from 'js-cookie';
-import AuthContext from '../shared/components/AuthContext';
 
 AOS.init({ once: true });
 
@@ -30,7 +29,6 @@ function Main(props) {
   const [dialogOpen, setDialogOpen] = useState(null);
   const [isCookieRulesDialogOpen, setIsCookieRulesDialogOpen] = useState(false);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const { userType } = useContext(AuthContext);
 
   const checkAuthStatus = useCallback(() => {
     setIsAuthenticated(!!Cookies.get('authToken'));
