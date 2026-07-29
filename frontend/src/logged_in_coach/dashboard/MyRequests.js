@@ -20,7 +20,6 @@ function MyRequests() {
     fetch(`${process.env.REACT_APP_API_BASE_URL}/fitConnect/coaches/${coachId}/requests`)
       .then(response => response.json())
       .then(data => {
-        console.log("Fetched client requests data:", data); 
         setClientRequests(Array.isArray(data) ? data : [data]);
       })
       .catch(error => console.error('Error fetching client requests:', error));
@@ -38,8 +37,7 @@ function MyRequests() {
       body: JSON.stringify(payload),
     })
     .then(response => response.json())
-    .then(data => {
-      console.log("Client accepted:", data);
+    .then(() => {
       //   refresh requests list
     })
     .catch(error => console.error('Error accepting client:', error));
@@ -59,8 +57,7 @@ function MyRequests() {
             throw new Error('Something went wrong');
         }
     })
-    .then(data => {
-        console.log("Client declined:", data);
+    .then(() => {
         setClientRequests(prevRequests => prevRequests.filter(client => client.user_id !== userId));
     })
     .catch(error => {

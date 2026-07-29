@@ -54,13 +54,12 @@ function MessagePopperButton(props) {
   const senderId = Number(localStorage.getItem('user_id'));
 
   useEffect(() => {
-    console.log("Sender ID:", senderId);
     fetch(`${process.env.REACT_APP_API_BASE_URL}/fitConnect/contactHistory/${senderId}/`)
         .then(response => response.json())
         .then(data => setUsers(data)) // Assuming the response is an array of users
         .catch(error => console.error('Error fetching users:', error));
 }, []);
-console.log("Users:", users)
+
   const handleUserSelect = (userId) => {
     fetch(`${process.env.REACT_APP_API_BASE_URL}/fitConnect/get_messages/${senderId}/${userId}/`)
         .then(response => response.json())

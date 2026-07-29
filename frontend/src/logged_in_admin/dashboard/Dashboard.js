@@ -18,17 +18,12 @@ const AdminDashboard = () => {
   useEffect(() => {
     fetch(`${process.env.REACT_APP_API_BASE_URL}/fitConnect/manage_become_coach_request`)
       .then(response => response.json())
-      .then(data => {
-        console.log("Fetched exercises:", data);
-        setCoachRequests(data)})
+      .then(data => setCoachRequests(data))
       .catch(error => console.error('Error fetching coach requests:', error));
 
     fetch(`${process.env.REACT_APP_API_BASE_URL}/fitConnect/exercises`)
       .then(response => response.json())
-      .then(data => {
-        console.log("Fetched exercises:", data);
-        setExerciseBank(data);
-      })
+      .then(data => setExerciseBank(data))
       .catch(error => console.error('Error fetching exercises:', error));
   }, []);
 
@@ -75,7 +70,6 @@ const AdminDashboard = () => {
   };
 
   const handleRemoveExercise = (exerciseId) => {
-    console.log('Attempting to remove exercise with ID:', exerciseId);
     fetch(`${process.env.REACT_APP_API_BASE_URL}/fitConnect/edit_exercise_bank`, {
       method: 'PUT',
       headers: {

@@ -134,7 +134,6 @@ const filteredClients = clients.filter(client =>
 
   const handleOpen = (client) => {
     setSelectedClient(client);
-    console.log("Selected client:", client);
     localStorage.setItem('client_id', client.user_id);
     localStorage.setItem('client_name', client.first_name);
 

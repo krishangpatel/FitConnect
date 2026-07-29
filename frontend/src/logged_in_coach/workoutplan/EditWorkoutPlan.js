@@ -139,7 +139,6 @@ const EditWorkoutPlan = (props) => {
                         weight: exercise.weight,
                         duration_minutes: exercise.duration_minutes,
                     };
-                    console.log(workoutPlanData)
                     if (!workoutPlanData.exercise_in_plan_id){
                         delete exercise.exercise_in_plan_id;
                         delete exercise.plan;
