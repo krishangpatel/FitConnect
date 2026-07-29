@@ -1,14 +1,16 @@
-# FitConnect-Frontend
-A frontend made with React JS and Material UI
+# FitConnect Frontend
 
-### Needs node v16 or below
+React app (Create React App, Material UI, react-router, axios) for FitConnect. See the
+[root README](../README.md) for the full setup guide, features, and screenshots — this file just
+covers frontend-specific notes.
 
-### Use
-cd FitConnect-Frontend
+## Quick start
 
-Create a .env in root dir that contains REACT_APP_API_BASE_URL=
-
+```bash
+nvm use             # requires Node 16.x - see .nvmrc and "Known limitations" in the root README
+cp .env.example .env # then set REACT_APP_API_BASE_URL to your running backend
 npm install
-
-### To run the page
 npm start
+```
+
+Opens at `http://localhost:3000/`.
