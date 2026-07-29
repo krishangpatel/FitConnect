@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import classNames from "classnames";
 import { Grid, Typography, Box, Button } from "@mui/material";
 import withStyles from "@mui/styles/withStyles";
-// import WaveBorder from "../../shared/components/WaveBorder";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { Link } from 'react-scroll';
 
