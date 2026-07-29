@@ -1,6 +1,9 @@
 .venv/
 venv/
 
+# Environment variables
+.env
+
 # Django #
 *.log
 *.pot
