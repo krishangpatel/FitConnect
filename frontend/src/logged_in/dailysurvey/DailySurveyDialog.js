@@ -52,11 +52,10 @@ const DailySurveyDialog = ({ userId, open, onClose, onUpdate }) => {
     const handleSubmit = async () => {
 
         try {
-            const response = await axios.post(`${process.env.REACT_APP_API_BASE_URL}fitConnect/daily_survey/${userId}/`, {
+            await axios.post(`${process.env.REACT_APP_API_BASE_URL}fitConnect/daily_survey/${userId}/`, {
                 ...surveyData,
                 recorded_date: serverDate
             });
-            console.log(response.data);
             onClose();
             if (onUpdate) onUpdate();
         } catch (error) {

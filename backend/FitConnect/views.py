@@ -1,5 +1,4 @@
 from datetime import timedelta
-from django.http import HttpRequest
 from django.core.exceptions import ValidationError
 from rest_framework.generics import get_object_or_404, ListAPIView
 from rest_framework.views import APIView
@@ -12,16 +11,12 @@ from .services.physical_health import add_physical_health_log
 from .services.goals import update_user_goal
 from .services.initial_survey_eligibility import check_initial_survey_eligibility
 from django.utils import timezone
-from django.http import JsonResponse, Http404
-import django, json
-from django.shortcuts import render, get_object_or_404
 from django.http import JsonResponse
-from django.views.decorators.csrf import csrf_exempt
+import django, json
 from django.db.models import Q
 
 from .serializers import *
 from .models import *
-import django
 
 def validate_password(password):
     if len(password) < 7:
@@ -44,7 +39,6 @@ class CreateUserView(APIView):
             try:
                 validate_password(password)
             except ValidationError as err:
-                print('password was invalid')
                 return Response(err, status=status.HTTP_400_BAD_REQUEST)
 
             serializer.save()
@@ -56,13 +50,10 @@ class CreateUserView(APIView):
             if credentials_serializer.is_valid():
                 credentials_serializer.save()
             else:
-                print('Credential serialization went wrong somehow')
                 return Response(credentials_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
             return Response(serializer.data, status=status.HTTP_201_CREATED)
 
         else:
-            print('serializer was not valid')
-            print(serializer.errors)
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
@@ -74,7 +65,7 @@ class LoginView(APIView):
         try:
             ph.verify(hash, password)
             return True
-        except VerifyMismatchError as e:
+        except VerifyMismatchError:
             return False
 
     def post(self, request):
@@ -123,7 +114,6 @@ class CoachList(APIView):
         experience = params.get('experience')
         if experience is not None:
             experience = int(experience)
-            print('experience=', experience)
             if experience < 0:
                 raise ValidationError('Experience cannot be negative')
 
@@ -200,7 +190,6 @@ class FireCoach(APIView):
             user_serializer.save()
             return Response('Successfully fired coach.', status=status.HTTP_200_OK)
         else:
-            print('Invalid:', user_serializer.errors)
             return Response(user_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
@@ -209,7 +198,6 @@ class CoachClients(APIView):
 
     def get(self, request, pk):
         clients = User.objects.filter(has_coach=self.hired, hired_coach__coach_id=pk)
-        print(clients)
         clients_serializer = UserSerializer(clients, many=True)
         return Response(clients_serializer.data, status=status.HTTP_200_OK)
 
@@ -465,7 +453,6 @@ class ExerciseInWorkoutPlanView(APIView):
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
     def post(self, request):
-        print('data: ', request.data)
         serializer = ExerciseInWorkoutPlanSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
@@ -539,7 +526,7 @@ class DailySurveyView(APIView):
 
     def get(self, request, user_id):
         try:
-            user = User.objects.get(user_id=user_id)
+            User.objects.get(user_id=user_id)
         except User.DoesNotExist as e:
             return Response({'error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
 
@@ -597,7 +584,7 @@ class DailySurveyView(APIView):
     def post(self, request, user_id):
         # Check to see if the requested user exists in the database
         try:
-            user = User.objects.get(user_id=user_id)
+            User.objects.get(user_id=user_id)
         except User.DoesNotExist as e:
             return Response({'error:': str(e)}, status=status.HTTP_400_BAD_REQUEST)
         

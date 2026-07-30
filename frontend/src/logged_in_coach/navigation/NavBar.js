@@ -203,7 +203,6 @@ function NavBar(props) {
           history.push('');
         } else {
           console.error('Logout failed');
-          console.log(response)
         }
       } catch (error) {
         console.error('Error during logout:', error);
@@ -459,8 +458,7 @@ function NavBar(props) {
                   to={element.link}
                   className={classes.menuLink}
                   onClick={() => {
-                    console.log(element.name);
-                    element.onClick();               
+                    element.onClick();
                     props.setSelectedTab(element.name);
                   }}
                   key={index}
