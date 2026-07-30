@@ -2,7 +2,6 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Typography, Box } from "@mui/material";
 import withStyles from "@mui/styles/withStyles";
-// import CheckIcon from "@mui/icons-material/Check";
 
 const styles = (theme) => ({
   card: {
