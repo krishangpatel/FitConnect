@@ -171,7 +171,7 @@ const ReadWorkoutPlan = ({ plan, classes, editHandler }) => {
             <Paper className={classes.Paper}>
                 <Toolbar className={classes.toolbar}>
                     <Typography variant="h4">{plan.plan_name}</Typography>
-                    {(todaysPlanId === null) || plan.plan_id !== todaysPlanId && (
+                    {(todaysPlanId === null) || (plan.plan_id !== todaysPlanId && (
                         <Button
                             variant="contained"
                             color="primary"
@@ -180,7 +180,7 @@ const ReadWorkoutPlan = ({ plan, classes, editHandler }) => {
                         >
                             Edit Plan
                         </Button>
-                    )}
+                    ))}
                     
                 </Toolbar>
                 <Table className={classes.table}>
