@@ -1,31 +1,21 @@
-# FitConnect-Backend
-Backend for fitness application
+# FitConnect Backend
 
-Step 1:
-In workbench run 
+Django REST API for FitConnect. See the [root README](../README.md) for the full setup guide,
+features, and screenshots — this file just covers backend-specific notes.
+
+## Quick start
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+cp .env.example .env   # then set SECRET_KEY (and DB_* vars if not using SQLite)
+python manage.py makemigrations FitConnect
+python manage.py migrate
+python manage.py loaddata dumpeddata.json
+python manage.py runserver
 ```
-DROP SCHEMA IF EXISTS fitness;
-CREATE SCHEMA fitness;
-USE fitness;
-```
 
-Step 2: 
-In the folder you cloned the repo to, create and activate a python virtual environment. 
-
-Step 3:
-Run `pip install -r requirements.txt`
-
-Step 4:
-Create an environment variable DB_PASSWORD and set it to the password for you MySQL 'root' user
-
-Step 5:
-Run `python manage.py makemigrations FitConnect`
-
-Step 6:
-Run `python manage.py migrate`
-
-Step 7: 
-Run `python mangage.py loaddata dumpeddata.json`
-
-Step 8:
-`python manage.py runserver` will bring the backend server up at localhost:8000/
+By default `.env.example` sets `USE_SQLITE=True`, which needs no database server. To run against
+MySQL instead, set `USE_SQLITE=False` and fill in the `DB_*` variables — see `.env.example` for
+the full list.
