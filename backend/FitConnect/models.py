@@ -257,7 +257,6 @@ class User(models.Model):
 
     # Changed the return to a string, this allows a properly functioning generic endpoint
     def __str__(self):
-        # return self.name
         return str(self.first_name + self.last_name)
 
     def save(self, *args, **kwargs):

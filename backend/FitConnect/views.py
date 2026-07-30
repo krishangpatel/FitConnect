@@ -1,5 +1,4 @@
 from datetime import timedelta
-from django.http import HttpRequest
 from django.core.exceptions import ValidationError
 from rest_framework.generics import get_object_or_404, ListAPIView
 from rest_framework.views import APIView
@@ -12,16 +11,12 @@ from .services.physical_health import add_physical_health_log
 from .services.goals import update_user_goal
 from .services.initial_survey_eligibility import check_initial_survey_eligibility
 from django.utils import timezone
-from django.http import JsonResponse, Http404
-import django, json
-from django.shortcuts import render, get_object_or_404
 from django.http import JsonResponse
-from django.views.decorators.csrf import csrf_exempt
+import django, json
 from django.db.models import Q
 
 from .serializers import *
 from .models import *
-import django
 
 def validate_password(password):
     if len(password) < 7:
@@ -74,7 +69,7 @@ class LoginView(APIView):
         try:
             ph.verify(hash, password)
             return True
-        except VerifyMismatchError as e:
+        except VerifyMismatchError:
             return False
 
     def post(self, request):
@@ -539,7 +534,7 @@ class DailySurveyView(APIView):
 
     def get(self, request, user_id):
         try:
-            user = User.objects.get(user_id=user_id)
+            User.objects.get(user_id=user_id)
         except User.DoesNotExist as e:
             return Response({'error': str(e)}, status=status.HTTP_400_BAD_REQUEST)
 
@@ -597,7 +592,7 @@ class DailySurveyView(APIView):
     def post(self, request, user_id):
         # Check to see if the requested user exists in the database
         try:
-            user = User.objects.get(user_id=user_id)
+            User.objects.get(user_id=user_id)
         except User.DoesNotExist as e:
             return Response({'error:': str(e)}, status=status.HTTP_400_BAD_REQUEST)
         
