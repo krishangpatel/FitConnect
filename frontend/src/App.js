@@ -24,7 +24,6 @@ function App() {
       ComponentToRender = LoggedInCoachComponent;
       break;
     case 'admin':
-      console.log("Switching to Admin Component");
       ComponentToRender = LoggedInAdminComponent;
       break;
     case 'logged_out':

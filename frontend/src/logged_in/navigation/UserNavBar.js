@@ -197,7 +197,6 @@ function NavBar(props) {
           window.dispatchEvent(logoutEvent);
         } else {
           console.error('Logout failed');
-          console.log(response)
         }
       } catch (error) {
         console.error('Error during logout:', error);

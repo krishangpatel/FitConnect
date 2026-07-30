@@ -91,7 +91,7 @@ const UpdateWorkoutPlan = (props) => {
 		const userId = localStorage.getItem('client_id');
 
 		try {
-			const responses = await Promise.all(
+			await Promise.all(
 				exerciseEntries[exerciseIndex].map(entry => {
 					const postData = {
 						user: userId,
@@ -109,8 +109,6 @@ const UpdateWorkoutPlan = (props) => {
 					});
 				})
 			);
-
-			console.log('Entries for exercise ' + exerciseId + ' submitted:', responses.map(response => response.data));
 
 			await fetchAndCheckWorkoutLogs();
 
