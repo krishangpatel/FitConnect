@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { List, ListItem, TextField, Button, Typography } from "@mui/material";
 import { makeStyles } from '@mui/styles';
@@ -24,7 +24,6 @@ const MessageHistory = ({ onBack, senderId, recipientId }) => {
     const [newMessage, setNewMessage] = useState('');
     const [messageHistory, setMessageHistory] = useState([]);
     const [, setRenderTrigger] = useState(false);
-    const bottomRef = useRef(null);
     const classes = useStyles();
 
     const fetchAndUpdateMessageHistory = () => {

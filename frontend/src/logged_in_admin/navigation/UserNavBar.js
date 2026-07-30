@@ -29,8 +29,6 @@ import UserImage from "../../shared/components/UserImage";
 // Icons
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import MenuIcon from "@mui/icons-material/Menu";
-import SportsIcon from '@mui/icons-material/Sports';
-import FitnessCenterIcon from '@mui/icons-material/FitnessCenter';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 const logo = "/images/logged_out/FitConnectLogo.png"
