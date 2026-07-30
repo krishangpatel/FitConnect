@@ -1,8 +1,6 @@
-import datetime
 from rest_framework import serializers
 from django.core.validators import EmailValidator
 from django.core.exceptions import ValidationError
-from rest_framework.validators import UniqueValidator
 
 
 from .models import *
@@ -81,20 +79,16 @@ class CoachRequestSerializer(serializers.Serializer):
         try:
             user_instance = User.objects.get(pk=value)
         except User.DoesNotExist:
-            print('User does not exist.')
             raise ValidationError('User does not exist.')
         if user_instance.has_coach:
-            print('User already has a coach.')
             raise ValidationError('User already has a coach.')
 
         if user_instance.hired_coach is not None:
-            print('User has already requested a coach.')
             raise ValidationError('User has already requested a coach.')
         return value
 
     def validate_coach(self, value):
         if not Coach.objects.filter(pk=value).exists():
-            print('Coach does not exist.')
             raise ValidationError('Requested coach does not exist.')
         return value
 
@@ -113,18 +107,15 @@ class CoachAcceptSerializer(serializers.Serializer):
         try:
             user_instance = User.objects.get(pk=value)
         except User.DoesNotExist:
-            print('User does not exist.')
             raise ValidationError('User does not exist.')
 
         if user_instance.has_coach:
-            print('User already has a coach.')
             raise ValidationError('User already has a coach.')
 
         return value
 
     def validate_coach(self, value):
         if not Coach.objects.filter(pk=value).exists():
-            print('Coach does not exist.')
             raise ValidationError('Coach does not exist.')
 
         try:
@@ -133,7 +124,6 @@ class CoachAcceptSerializer(serializers.Serializer):
             user_instance = None
 
         if user_instance is not None and user_instance.hired_coach_id != value:
-            print('Coach was not requested by user.')
             raise ValidationError('User has not requested this coach.')
 
         return value
@@ -165,12 +155,6 @@ class ExerciseListSerializer(serializers.ModelSerializer):
     class Meta:
         model = ExerciseBank
         fields = ['exercise_id', 'name', 'description', 'muscle_group_name', 'equipment_name']
-
-class ExerciseSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = ExerciseBank
-        fields = ['name']
-
 
 class BecomeCoachRequestSerializer(serializers.ModelSerializer):
     class Meta:
@@ -220,25 +204,21 @@ class ExerciseInWorkoutPlanSerializer(serializers.ModelSerializer):
         fields = ['exercise_in_plan_id', 'plan_id', 'exercise', 'sets', 'reps', 'weight', 'duration_minutes', 'is_active']
 
     def validate_sets(self, value):
-        #print('sets = ', value)
         if value <= 0:
             raise ValidationError('Number of sets must be at least 1')
         return value
 
     def validate_reps(self, value):
-        #print('reps = ', value)
         if value <= 0:
             raise ValidationError('Number of reps must be at least 1')
         return value
 
     def validate_weight(self, value):
-        #print('weight = ', value)
         if value <= 0:
             raise ValidationError('Weight cannot be less than 1')
         return value
 
     def validate_duration_minutes(self, value):
-        #print('duration = ', value)
         if value <= 0:
             raise ValidationError('Duration cannot be less than 1')
         return value
@@ -376,7 +356,6 @@ class CoachDeclineSerializer(serializers.Serializer):
 
     def validate_coach(self, value):
         if not Coach.objects.filter(pk=value).exists():
-            print('Coach does not exist.')
             raise ValidationError('Coach does not exist.')
 
         return value

@@ -257,7 +257,6 @@ class User(models.Model):
 
     # Changed the return to a string, this allows a properly functioning generic endpoint
     def __str__(self):
-        # return self.name
         return str(self.first_name + self.last_name)
 
     def save(self, *args, **kwargs):
@@ -276,7 +275,7 @@ class UserCredentials(models.Model):
     last_update = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
-        return self.name
+        return str(self.user)
 
     def save(self, *args, **kwargs):
         self.last_update = timezone.now()

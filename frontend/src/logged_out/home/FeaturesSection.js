@@ -5,7 +5,6 @@ import FeatureCard from "./FeatureCard";
 import ArticleIcon from '@mui/icons-material/Article';
 import SportsIcon from '@mui/icons-material/Sports';
 import MonitorHeartIcon from '@mui/icons-material/MonitorHeart';
-// import useWidth from "../../shared/functions/useWidth";
 import useMediaQuery from "@mui/material/useMediaQuery";
 
 const iconSize = 80;
@@ -38,7 +37,6 @@ const features = [
 ];
 function FeaturesSection(props) {
   const { theme } = props;
-  // const width = useWidth();
   const isWidthUpMd = useMediaQuery(theme.breakpoints.up("md"));
 
   return (

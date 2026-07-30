@@ -11,8 +11,6 @@ import useServerDate from '../../shared/functions/userServerDate';
 
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 import DeleteIcon from '@mui/icons-material/Delete'
-// import CheckIcon from '@mui/icons-material/Check';
-// import EditIcon from '@mui/icons-material/Edit';
 
 const styles = (theme) => ({
     container: {
@@ -93,7 +91,7 @@ const UpdateWorkoutPlan = (props) => {
 		const userId = localStorage.getItem('client_id');
 
 		try {
-			const responses = await Promise.all(
+			await Promise.all(
 				exerciseEntries[exerciseIndex].map(entry => {
 					const postData = {
 						user: userId,
@@ -111,8 +109,6 @@ const UpdateWorkoutPlan = (props) => {
 					});
 				})
 			);
-
-			console.log('Entries for exercise ' + exerciseId + ' submitted:', responses.map(response => response.data));
 
 			await fetchAndCheckWorkoutLogs();
 

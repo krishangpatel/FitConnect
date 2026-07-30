@@ -4,7 +4,7 @@ import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogTitle from '@mui/material/DialogTitle';
-import { List, ListItem, Divider, Typography, Paper, Button, Snackbar } from '@mui/material';
+import { List, ListItem, Divider, Typography, Paper, Button } from '@mui/material';
 import StarIcon from '@mui/icons-material/Star';
 import DeleteIcon from '@mui/icons-material/Delete';
 import axios from 'axios';
@@ -36,12 +36,11 @@ const WorkoutPlanList = ({ plans, onSelectPlan, onCreateNewPlan, onSelectTodaysP
     const [todaysPlan, setTodaysPlan] = useState(null);
     const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
     const [deleteTarget, setDeleteTarget] = useState(false);
-    const [snackbar, setSnackbar] = useState({
+    const [, setSnackbar] = useState({
         open: false,
         message: '',
         severity: 'info',
       });
-      const [deleteDialogClose, setDeleteDialogClose] = useState(false);
       const [hoveredPlan, setHoveredPlan] = useState(null);
 
 

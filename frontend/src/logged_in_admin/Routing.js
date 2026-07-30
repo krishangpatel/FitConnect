@@ -19,7 +19,6 @@ const styles = (theme) => ({
 function Routing(props) {
   const {
     classes,
-    pushMessageToSnackbar,
     selectDashboard,
   } = props;
   useLocationBlocker();

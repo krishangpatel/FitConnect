@@ -5,7 +5,6 @@ import {
   Typography,
 } from "@mui/material";
 import withStyles from "@mui/styles/withStyles";
-// import WaveBorder from "../../shared/components/WaveBorder";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import classNames from "classnames";
 

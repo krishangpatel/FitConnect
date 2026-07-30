@@ -95,7 +95,7 @@ function ExerciseBank({ classes, onExerciseClick, isDialogMode, onAddExercise })
                 setExercises(exercisesWithId);
                 setFilteredExercises(exercisesWithId);
             })
-            .catch(error => console.log(error));
+            .catch(error => console.error(error));
     }, []);
 
 

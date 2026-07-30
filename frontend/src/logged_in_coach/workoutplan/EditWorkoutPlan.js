@@ -40,7 +40,7 @@ const styles = theme => ({
 const EditWorkoutPlan = (props) => {
     const { classes, plan, onSave, onCancel } = props;
 
-    const [planTitle, setPlanTitle] = useState(plan.plan_name);
+    const [planTitle] = useState(plan.plan_name);
     const [exercises, setExercises] = useState(plan.exercises);
     const [openExerciseBank, setOpenExerciseBank] = useState(false);
     const [snackbar, setSnackbar] = useState({
@@ -139,7 +139,6 @@ const EditWorkoutPlan = (props) => {
                         weight: exercise.weight,
                         duration_minutes: exercise.duration_minutes,
                     };
-                    console.log(workoutPlanData)
                     if (!workoutPlanData.exercise_in_plan_id){
                         delete exercise.exercise_in_plan_id;
                         delete exercise.plan;

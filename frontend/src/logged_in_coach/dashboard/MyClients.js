@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Box, Card, CardContent, CardActionArea, CardMedia, Typography, Button, Modal, Grid } from '@mui/material';
+import { Box, Card, CardContent, CardActionArea, Typography, Button, Modal, Grid } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import { useHistory } from 'react-router-dom';
 import {
@@ -37,9 +37,6 @@ const useStyles = makeStyles((theme) => ({
     outline: 'none',
     maxWidth: '500px',
     margin: 'auto',
-  },
-  button: {
-    margin: theme.spacing(1),
   },
   deleteButton: {
     backgroundColor: theme.palette.error.main,
@@ -137,7 +134,6 @@ const filteredClients = clients.filter(client =>
 
   const handleOpen = (client) => {
     setSelectedClient(client);
-    console.log("Selected client:", client);
     localStorage.setItem('client_id', client.user_id);
     localStorage.setItem('client_name', client.first_name);
 
