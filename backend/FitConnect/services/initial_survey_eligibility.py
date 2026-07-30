@@ -23,5 +23,4 @@ def check_initial_survey_eligibility(user_id):
     elif has_physical_health_logs:
         return {"error": "User physical health log(s) already exist"}, status.HTTP_400_BAD_REQUEST
 
-    print("User is eligible for initial survey")
     return None, None

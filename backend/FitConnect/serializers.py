@@ -79,20 +79,16 @@ class CoachRequestSerializer(serializers.Serializer):
         try:
             user_instance = User.objects.get(pk=value)
         except User.DoesNotExist:
-            print('User does not exist.')
             raise ValidationError('User does not exist.')
         if user_instance.has_coach:
-            print('User already has a coach.')
             raise ValidationError('User already has a coach.')
 
         if user_instance.hired_coach is not None:
-            print('User has already requested a coach.')
             raise ValidationError('User has already requested a coach.')
         return value
 
     def validate_coach(self, value):
         if not Coach.objects.filter(pk=value).exists():
-            print('Coach does not exist.')
             raise ValidationError('Requested coach does not exist.')
         return value
 
@@ -111,18 +107,15 @@ class CoachAcceptSerializer(serializers.Serializer):
         try:
             user_instance = User.objects.get(pk=value)
         except User.DoesNotExist:
-            print('User does not exist.')
             raise ValidationError('User does not exist.')
 
         if user_instance.has_coach:
-            print('User already has a coach.')
             raise ValidationError('User already has a coach.')
 
         return value
 
     def validate_coach(self, value):
         if not Coach.objects.filter(pk=value).exists():
-            print('Coach does not exist.')
             raise ValidationError('Coach does not exist.')
 
         try:
@@ -131,7 +124,6 @@ class CoachAcceptSerializer(serializers.Serializer):
             user_instance = None
 
         if user_instance is not None and user_instance.hired_coach_id != value:
-            print('Coach was not requested by user.')
             raise ValidationError('User has not requested this coach.')
 
         return value
@@ -364,7 +356,6 @@ class CoachDeclineSerializer(serializers.Serializer):
 
     def validate_coach(self, value):
         if not Coach.objects.filter(pk=value).exists():
-            print('Coach does not exist.')
             raise ValidationError('Coach does not exist.')
 
         return value
